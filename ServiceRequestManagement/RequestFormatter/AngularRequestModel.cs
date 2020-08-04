@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ServiceRequestManagement.RequestFormatter
 {
-    enum StatusRef
+    /*enum StatusRef
     {
         Open=1,
         InProgress,
@@ -39,6 +39,7 @@ namespace ServiceRequestManagement.RequestFormatter
         InternationalTravelTicket,
         SalaryCalculation
     }
+    */
     public class AngularRequestModel
     {
         public string RequestId { get; set; }

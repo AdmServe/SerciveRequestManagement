@@ -35,9 +35,10 @@ namespace ServiceRequestManagement.Services
                 oldRequest.StatusId = serviceRequest.StatusId;
                 oldRequest.Summary = serviceRequest.Summary;
                // oldRequest.Title = serviceRequest.Title;
-                oldRequest.Comments = serviceRequest.Comments;
+               // oldRequest.Comments = serviceRequest.Comments;
                 oldRequest.LastModifiedOn = serviceRequest.LastModifiedOn;
                 oldRequest.LastModifiedBy = serviceRequest.LastModifiedBy;
+
                 context.SaveChanges();
 
             }

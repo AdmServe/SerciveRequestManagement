@@ -42,8 +42,8 @@ namespace ServiceRequestManagement.Controllers
         public IActionResult EmployeeByDept([FromRoute]string id)
         {
             var context = new SRMContext();
-            int DeptId = context.Department.FirstOrDefault(s => s.Name.Equals(id)).Id;
-            var request = _service.GetEmployeeByDept(DeptId);
+            int deptId = context.Department.FirstOrDefault(s => s.Name.Equals(id)).Id;
+            var request = _service.GetEmployeeByDept(deptId);
 
             return Ok(request);
         }

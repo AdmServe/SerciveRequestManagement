@@ -8,41 +8,7 @@ using System.Threading.Tasks;
 
 namespace ServiceRequestManagement.RequestFormatter
 {
-    /*enum StatusRef
-    {
-        Open=1,
-        InProgress,
-        Close
-    }
-    enum RequestTypeRef
-    {
-        Service=1,
-        Issue
-    }
-    enum DepartmentRef
-    {
-        IT=1,
-        Admin,
-        Finance,
-        Other
-
-    }
-    enum CategoryRef
-    {
-        Hardware=1,
-        Software,
-        TravelBooking,
-        SalaryIssue
-    }
-    enum SubCategoryRef
-    {
-        Laptop=5,
-        Mouse,
-        Keyboard,
-        InternationalTravelTicket,
-        SalaryCalculation
-    }
-    */
+   
     public class AngularRequestModel
     {
         public string RequestId { get; set; }
@@ -63,7 +29,7 @@ namespace ServiceRequestManagement.RequestFormatter
 
         public string LastModifiedBy { get; set; }
 
-
+        
         public  void CopyData(Request request)
         {
             SRMContext context = new SRMContext();
@@ -77,12 +43,6 @@ namespace ServiceRequestManagement.RequestFormatter
             this.RequestDepartment = context.Department.FirstOrDefault(n => n.Id == request.DepartmentId).Name;
             this.RequestCategory = context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Name;
             this.RequestSubCategory = context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Name;
-            //this.RequestStatus  = Enum.GetName( typeof(StatusRef), request.StatusId);
-            // this.RequestType = Enum.GetName(typeof(RequestTypeRef),request.RequestTypeId);
-            //this.RequestDepartment = Enum.GetName(typeof(DepartmentRef),request.DepartmentId);
-            // this.RequestCategory = Enum.GetName(typeof(CategoryRef), request.CategoryId);
-            //this.RequestSubCategory = Enum.GetName(typeof(SubCategoryRef),request.SubCategoryId);
-
             this.RequestSummary = request.Summary;
             this.Title = request.Title;
             this.CreatedOn = request.CreatedOn;
@@ -107,12 +67,6 @@ namespace ServiceRequestManagement.RequestFormatter
             request.DepartmentId = context.Department.FirstOrDefault(n => n.Name == this.RequestDepartment).Id;
             request.CategoryId = context.Category.FirstOrDefault(n => n.Name == this.RequestCategory).Id;
             request.SubCategoryId = context.Category.FirstOrDefault(n => n.Name == this.RequestSubCategory).Id;
-            //  request.StatusId = (int)Enum.Parse(typeof(StatusRef),obj.RequestStatus);
-            // request.RequestTypeId = (int)Enum.Parse(typeof(RequestTypeRef), obj.RequestType);
-            // request.DepartmentId = (int)Enum.Parse(typeof(DepartmentRef), obj.RequestDepartment);
-            //request.CategoryId = (int)Enum.Parse(typeof(CategoryRef), obj.RequestCategory);
-            //request.SubCategoryId = (int)Enum.Parse(typeof(SubCategoryRef), obj.RequestSubCategory);
-
             request.Summary = this.RequestSummary;
             request.CreatedOn = this.CreatedOn;
             request.LastModifiedOn = this.LastModifiedOn;

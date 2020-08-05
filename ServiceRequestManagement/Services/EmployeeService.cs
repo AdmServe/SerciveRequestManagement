@@ -15,10 +15,10 @@ namespace ServiceRequestManagement.Services
             return context.Employee.ToList();
         }
 
-        public List<Employee> GetEmployeeByDept( int DeptId)
+        public List<Employee> GetEmployeeByDept(int DeptId)
         {
             var context = new SRMContext();
-            //Department deptId = context.Department.FirstOrDefault(s => s.Name.Equals(DepartmentName, StringComparison.OrdinalIgnoreCase));
+           
             return context.Employee.Where(e => e.DepartmentId == DeptId ).ToList();
         }
 

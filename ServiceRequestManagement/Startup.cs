@@ -42,9 +42,9 @@ namespace ServiceRequestManagement
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 
-            services.AddTransient<IStatusService, StatusService>();
-            services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IRequestService, RequestService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

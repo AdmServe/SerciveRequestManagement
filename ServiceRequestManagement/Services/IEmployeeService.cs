@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ServiceRequestManagement.Services
 {
-    public interface IStatusService
+    public interface IEmployeeService
     {
-        List<Status> GetAllStatus();
-        Status GetStatusDetail(int StausId);
-      
-
+       List<Employee> GetAllEmployees();
+       Employee GetEmployeeDetail(int Id);
+       List<Employee> GetEmployeeByDept(int DeptId);
     }
 }

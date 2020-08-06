@@ -43,7 +43,7 @@ namespace ServiceRequestManagement.RequestFormatter
             this.RequestType = context.RequestType.FirstOrDefault(n => n.Id == request.RequestTypeId).RequestType1;
             this.RequestDepartment = context.Department.FirstOrDefault(n => n.Id == request.DepartmentId).Name;
             this.RequestCategory = context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Name;
-            this.RequestSubCategory = context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Name;
+            this.RequestSubCategory = context.Category.FirstOrDefault(n => n.Id == request.SubCategoryId).Name;
             this.RequestSummary = request.Summary;
             this.Title = request.Title;
             this.CreatedOn = request.CreatedOn;

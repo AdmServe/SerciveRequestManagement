@@ -28,10 +28,11 @@ namespace ServiceRequestManagement.Controllers
         {
             var allRequest = _service.GetAllRequests();
            List<AngularRequestModel> objList= new List<AngularRequestModel>();
-            AngularRequestModel obj = new AngularRequestModel();
+           
             
             foreach ( var request in allRequest){
 
+                AngularRequestModel obj = new AngularRequestModel();
                 obj.CopyData(request);
 
                 objList.Add(obj);

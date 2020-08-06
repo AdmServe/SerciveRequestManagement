@@ -63,11 +63,11 @@ namespace ServiceRequestManagement.RequestFormatter
             request.Title = this.Title;
 
 
-            request.StatusId = context.Status.FirstOrDefault(n => n.Status1 == this.RequestStatus).Id;
-            request.RequestTypeId = context.RequestType.FirstOrDefault(n => n.RequestType1 == this.RequestType).Id;
-            request.DepartmentId = context.Department.FirstOrDefault(n => n.Name == this.RequestDepartment).Id;
-            request.CategoryId = context.Category.FirstOrDefault(n => n.Name == this.RequestCategory).Id;
-            request.SubCategoryId = context.Category.FirstOrDefault(n => n.Name == this.RequestSubCategory).Id;
+            request.StatusId = context.Status.FirstOrDefault(n => n.Status1.Equals(this.RequestStatus)).Id;
+            request.RequestTypeId = context.RequestType.FirstOrDefault(n => n.RequestType1.Equals(this.RequestType)).Id;
+            request.DepartmentId = context.Department.FirstOrDefault(n => n.Name.Equals(this.RequestDepartment)).Id;
+            request.CategoryId = context.Category.FirstOrDefault(n => n.Name.Equals(this.RequestCategory)).Id;
+            request.SubCategoryId = context.Category.FirstOrDefault(n => n.Name.Equals(this.RequestSubCategory)).Id;
             request.Summary = this.RequestSummary;
             request.CreatedOn = this.CreatedOn;
             request.LastModifiedOn = this.LastModifiedOn;

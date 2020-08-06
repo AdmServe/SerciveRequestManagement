@@ -1,4 +1,6 @@
 ﻿using ServiceRequestManagement.Models;
+using ServiceRequestManagment.Models;
+using ServiceRequestManagment.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,12 @@ namespace ServiceRequestManagement.Services
 {
     public class RequestService : IRequestService
     {
+        private readonly IEmailSender emailSender;
+
+        public RequestService(IEmailSender emailSender)
+        {
+            this.emailSender = emailSender;
+        }
         public List<Request> GetAllRequests()
         {
             var context = new SRMContext();
@@ -43,6 +51,41 @@ namespace ServiceRequestManagement.Services
 
             }
 
+
+            try
+            {
+
+                string CreatedEmpEmail = context.Employee.FirstOrDefault(e => e.Id == serviceRequest.CreatedEmpId).EmailId;
+                string AssignedEmpEmail = context.Employee.FirstOrDefault(e => e.Id == serviceRequest.AssignedEmpId).EmailId;
+                string AdminEmail = context.Employee.FirstOrDefault(e => e.DepartmentId == serviceRequest.DepartmentId && e.RoleId == (context.Role.FirstOrDefault(r => r.Role1.Equals("Admin")).Id)).EmailId;
+
+                string sub = "Service for  request  " + serviceRequest.Title;
+                //string content = JsonConvert.SerializeObject(serviceRequest);
+
+                string content = "Request Id: " + serviceRequest.Id +
+                                 "\nRequest Title: " + serviceRequest.Title +
+                                 "\nSummary: " + serviceRequest.Summary +
+                                 "\nComments: " + serviceRequest.Comments.ToString() +
+                                 "\nRequest Created by: " + context.Employee.FirstOrDefault(e => e.Id == serviceRequest.CreatedEmpId).FirstName +
+                                 "\nRequest Assigned to: " + context.Employee.FirstOrDefault(e => e.Id == serviceRequest.AssignedEmpId).FirstName;
+
+
+                if (serviceRequest.StatusId == 2)
+                {
+                    content = content + "\n request is in process";
+                }
+                else if (serviceRequest.StatusId == 3)
+                {
+                    content = content + "\n request has been completed";
+                }
+                var message = new Message(new string[] { CreatedEmpEmail, AssignedEmpEmail, AdminEmail }, sub, content);
+                emailSender.SendEmail(message);
+                //
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

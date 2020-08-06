@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ServiceRequestManagement.Models;
 using ServiceRequestManagement.Services;
+using ServiceRequestManagment.Models;
+using ServiceRequestManagment.Services;
 
 namespace ServiceRequestManagement
 {
@@ -44,6 +46,10 @@ namespace ServiceRequestManagement
 
             services.AddTransient<IRequestService, RequestService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            var emailConfig = Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
 
         }
 

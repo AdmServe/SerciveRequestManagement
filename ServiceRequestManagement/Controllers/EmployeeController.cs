@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ServiceRequestManagement.Models;
+using ServiceRequestManagement.RequestFormatter;
 using ServiceRequestManagement.Services;
 
 namespace ServiceRequestManagement.Controllers
@@ -23,8 +24,17 @@ namespace ServiceRequestManagement.Controllers
         [HttpGet("[action]")]
         public IActionResult GetAllEmployees()
         {
-            var allStatus = _service.GetAllEmployees();
-            return Ok(allStatus);
+            var allEmployees = _service.GetAllEmployees();
+            List<AngularEmployeeModel> objList = new List<AngularEmployeeModel>();
+            foreach (var employee in allEmployees)
+            {
+                AngularEmployeeModel obj = new AngularEmployeeModel();
+                obj.CopyData(employee);
+
+                objList.Add(obj);
+            }
+
+            return Ok(objList);
         }
 
         // api/employee/employeedetail/1
@@ -33,7 +43,11 @@ namespace ServiceRequestManagement.Controllers
         {
             var request = _service.GetEmployeeDetail(id);
 
-            return Ok(request);
+            AngularEmployeeModel obj = new AngularEmployeeModel();
+            obj.CopyData(request);
+
+      
+            return Ok(obj);
         }
 
         // api/employee/employeebydept/IT
@@ -43,9 +57,18 @@ namespace ServiceRequestManagement.Controllers
         {
             var context = new SRMContext();
             int deptId = context.Department.FirstOrDefault(s => s.Name.Equals(id)).Id;
-            var request = _service.GetEmployeeByDept(deptId);
+            var allEmployees = _service.GetEmployeeByDept(deptId);
 
-            return Ok(request);
+            List<AngularEmployeeModel> objList = new List<AngularEmployeeModel>();
+            foreach (var employee in allEmployees)
+            {
+                AngularEmployeeModel obj = new AngularEmployeeModel();
+                obj.CopyData(employee);
+
+                objList.Add(obj);
+            }
+
+            return Ok(objList);
         }
 
     }

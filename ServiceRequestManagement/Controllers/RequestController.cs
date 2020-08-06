@@ -61,8 +61,21 @@ namespace ServiceRequestManagement.Controllers
         [HttpPut("UpdateRequest/{id}")]
         public IActionResult UpdateRequest(int id, [FromBody] AngularRequestModel obj)
         {
-           
-           
+
+            SRMContext context = new SRMContext();
+            //string Comment = obj.Comment;
+            Comments c = new Comments();
+            c.Comment = obj.Comment;
+            c.EmployeeId = obj.AssignedEmpId;
+            c.RequestId = Int32.Parse(obj.RequestId);
+            c.CreatedOn = DateTimeOffset.Now;
+            c.LastModifiedOn = DateTimeOffset.Now;
+            c.LogTime = DateTimeOffset.MinValue;
+            c.LastModifiedBy = "MAYURESH";
+
+            context.Comments.Add(c);
+
+            context.SaveChanges();
             _service.UpdateRequest(id, obj.SendData());
 
             return Ok(obj);

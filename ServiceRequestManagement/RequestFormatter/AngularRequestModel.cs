@@ -29,6 +29,7 @@ namespace ServiceRequestManagement.RequestFormatter
 
         public string LastModifiedBy { get; set; }
 
+        public string Comment { get; set; }
         
         public  void CopyData(Request request)
         {
@@ -50,7 +51,7 @@ namespace ServiceRequestManagement.RequestFormatter
             this.CreatedEmpId = request.CreatedEmpId;
             this.AssignedEmpId = request.AssignedEmpId;
             this.LastModifiedBy = request.LastModifiedBy;
-
+            
         }
 
         public Request SendData()

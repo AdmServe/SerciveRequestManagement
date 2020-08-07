@@ -64,7 +64,7 @@ namespace ServiceRequestManagement.Services
                 string content = "Request Id: " + serviceRequest.Id +
                                  "\nRequest Title: " + serviceRequest.Title +
                                  "\nSummary: " + serviceRequest.Summary +
-                                 "\nComments: " + context.Comments.OrderByDescending(e=> e.RequestId == serviceRequest.Id).FirstOrDefault().Comment +
+                                 "\nComments: " + context.Comments.OrderByDescending(e=> e.Id ).FirstOrDefault(e=> e.RequestId==serviceRequest.Id).Comment +
                                  "\nRequest Created by: " + context.Employee.FirstOrDefault(e => e.Id == serviceRequest.CreatedEmpId).FirstName +
                                  "\nRequest Assigned to: " + context.Employee.FirstOrDefault(e => e.Id == serviceRequest.AssignedEmpId).FirstName;
 
